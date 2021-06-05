@@ -36,7 +36,7 @@ function aiTurn(){
 }
 
 function playerChange(){
-  if(currentPlayer === 'X'){
+  if(currentPlayer === 'X' && gameActive){
     currentPlayer = 'O';
     aiTurn();
     checkWin();
@@ -64,14 +64,18 @@ function checkWin(){
     if(gameState[condition[0]] === '' || gameState[condition[1]] === '' || gameState[condition[2]] === ''){
       '';
     } else if(gameState[condition[0]] === gameState[condition[1]] && gameState[condition[0]] === gameState[condition[2]]){
-      playerTurn.innerHTML = currentPlayer + " won!";
-      if(currentPlayer = 'O'){
+      console.log(currentPlayer + ' won')
+      if(currentPlayer === 'O'){
         playerTurn.innerHTML = "My first win! You've earned your code: learnfromdefeat";
+      } else {
+        playerTurn.innerHTML = currentPlayer + " won!";
       }
       // you can bring this in secondarily
       gameActive = false;
-      // you can bring this in lastly for this function
-    } else if(gameState.includes('') === false){
+      return
+    } 
+    // you can bring this in lastly for this function
+    else if(gameState.includes('') === false){
       playerTurn.innerHTML = "DRAW!"
       gameActive = false;
     } 
