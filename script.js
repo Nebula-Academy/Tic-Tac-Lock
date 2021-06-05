@@ -19,7 +19,6 @@ let winningConditions=[
 ];
 
 function fillBox(clickedCell){
-  console.log(clickedCell)
   gameState[clickedCell.getAttribute('id')] = currentPlayer;
   clickedCell.innerHTML = currentPlayer;
 }
@@ -64,7 +63,7 @@ function checkWin(){
     if(gameState[condition[0]] === '' || gameState[condition[1]] === '' || gameState[condition[2]] === ''){
       '';
     } else if(gameState[condition[0]] === gameState[condition[1]] && gameState[condition[0]] === gameState[condition[2]]){
-      console.log(currentPlayer + ' won')
+      console.log(currentPlayer, 'won')
       if(currentPlayer === 'O'){
         playerTurn.innerHTML = "My first win! You've earned your code: learnfromdefeat";
       } else {
@@ -75,7 +74,7 @@ function checkWin(){
       return
     } 
     // you can bring this in lastly for this function
-    else if(gameState.includes('') === false){
+    else if(gameState.includes('') === false && gameActive){
       playerTurn.innerHTML = "DRAW!"
       gameActive = false;
     } 
