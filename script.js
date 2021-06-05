@@ -65,6 +65,9 @@ function checkWin(){
       '';
     } else if(gameState[condition[0]] === gameState[condition[1]] && gameState[condition[0]] === gameState[condition[2]]){
       playerTurn.innerHTML = currentPlayer + " won!";
+      if(currentPlayer = 'O'){
+        playerTurn.innerHTML = "My first win! You've earned your code: learnfromdefeat";
+      }
       // you can bring this in secondarily
       gameActive = false;
       // you can bring this in lastly for this function
