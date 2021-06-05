@@ -19,18 +19,34 @@ let winningConditions=[
 ];
 
 function fillBox(clickedCell){
-  gameState[clickedCell.getAttribute('data')] = currentPlayer;
+  console.log(clickedCell)
+  gameState[clickedCell.getAttribute('id')] = currentPlayer;
   clickedCell.innerHTML = currentPlayer;
+}
+
+function randomNum(){
+  let rand = Math.floor(Math.random() * 9);
+  return gameState[rand] === '' ? rand : randomNum() 
+}
+
+function aiTurn(){
+  if(gameState.includes("")){
+    fillBox(document.getElementById(randomNum()))
+  }
 }
 
 function playerChange(){
   if(currentPlayer === 'X'){
     currentPlayer = 'O';
+    aiTurn();
+    checkWin();
+    playerChange();
   } else {
     currentPlayer = 'X';
   }
-  
-  playerTurn.innerHTML = currentPlayer + "'s turn";
+  if(gameActive){
+    playerTurn.innerHTML = currentPlayer + "'s turn";
+  }
 }
 
 function restart(){
@@ -48,16 +64,15 @@ function checkWin(){
     if(gameState[condition[0]] === '' || gameState[condition[1]] === '' || gameState[condition[2]] === ''){
       '';
     } else if(gameState[condition[0]] === gameState[condition[1]] && gameState[condition[0]] === gameState[condition[2]]){
-      playerChange();
       playerTurn.innerHTML = currentPlayer + " won!";
       // you can bring this in secondarily
       gameActive = false;
-    }
-  })
-  // you can bring this in lastly for this function
-  if(gameState.includes('') === false){
+      // you can bring this in lastly for this function
+    } else if(gameState.includes('') === false){
       playerTurn.innerHTML = "DRAW!"
-  }
+      gameActive = false;
+    } 
+  }) 
 }
 // start by creating a clicked function which log's "hi"
 // return to html and add all clicked event listeners
@@ -75,7 +90,7 @@ function clicked(e){
   if(e.target.innerHTML === ''){
   // the following line should be one of the FIRST items completed
     fillBox(e.target);
+    checkWin();
     playerChange();
-    checkWin();  
   }
 }
