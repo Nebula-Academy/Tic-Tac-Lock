@@ -1,10 +1,9 @@
 // Start with completing lines 2-20, then go on to clicked
 let playerTurn = document.querySelector('.player-turn');
-
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
-
+console.log(9.15)
 playerTurn.innerHTML = currentPlayer + "'s turn";
 
 let winningConditions=[
